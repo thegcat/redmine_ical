@@ -1,0 +1,15 @@
+= redmine_icalendar_export (redmics)
+
+ICalendar (ICS) view of issue- and version-deadlines.
+
+== Licence
+
+GPL v2
+
+== Requirements
+
+This plug-in requires icalendar >= 1.1.5 (http://icalendar.rubyforge.org/).
+
+== Implementation details
+
+Issues are exported as VEVENT-items with their due-date as the event date. The same applies to versions. Unassigned issues have the status TENTATIVE.

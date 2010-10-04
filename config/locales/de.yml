@@ -1,0 +1,9 @@
+# German strings go here
+de:
+  label_icalendar_header: ICalendar
+  label_issues_mine: Meine Tickets
+  label_issues_assigned: Zugewiesene Tickets
+  label_issues_all: Alle Tickets
+  label_issues_open_only: nur offene
+  label_calendar_deadline: Ende
+
