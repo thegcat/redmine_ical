@@ -39,7 +39,7 @@ class ICalendarController < ApplicationController
     # assignment
     case params[:assigned_to]
     when 'me'
-      assigned_to_condition = ["assigned_to_id == #{User.current.id}"]
+      assigned_to_condition = ["assigned_to_id = #{User.current.id}"]
     when '+'
       assigned_to_condition = ["assigned_to_id is not null"]
     when '*'
