@@ -1,0 +1,13 @@
+diff --git a/app/views/calendars/show.html.erb b/app/views/calendars/show.html.erb
+index a898f98..aa9ff73 100644
+--- a/app/views/calendars/show.html.erb
++++ b/app/views/calendars/show.html.erb
+@@ -37,6 +37,8 @@
+ <% if @query.valid? %>
+ <%= render :partial => 'common/calendar', :locals => {:calendar => @calendar} %>
+ 
++<%= call_hook(:view_calendars_show_bottom, { :year => @year, :month => @month, :project => @project, :query => @query }) %>
++
+ <p class="legend cal">
+ 	<span class="starting"><%= l(:text_tip_task_begin_day) %></span>
+ 	<span class="ending"><%= l(:text_tip_task_end_day) %></span>
