@@ -15,18 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-require 'redmine'
-
-require 'redmine_icalendar_export/hooks'
-
-Redmine::Plugin.register :redmine_icalendar_export do
-  name 'redmine icalendar export plugin (aka redmics)'
-  author 'Frank Schwarz, Jan Schulz-Hofen (Planio)'
-  description 'ICalendar view of issue- and version-deadlines'
-  version '1.1'
-  url 'http://code.google.com/p/redmics/'
-  author_url 'http://www.buschmais.de/'
+module RedmineIcalendarExport
+  class ViewHooks < Redmine::Hook::ViewListener
+    render_on :view_calendars_show_bottom, :partial => 'hooks/redmine_icalendar_export/view_calendars_show_bottom'
+  end
 end
-
-

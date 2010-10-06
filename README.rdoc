@@ -10,6 +10,8 @@ GPL v2
 
 This plug-in requires icalendar >= 1.1.5 (http://icalendar.rubyforge.org/).
 
+Further, a the hook view_calendars_show_bottom needs to be present in app/views/calendars/show.html.erb. The hook is not yet in Redmine core, a patch can be found in extra/. If you want this hook in Redmine Core to avoid patching your Redmine, please vote for it here: http://www.redmine.org/issues/6586
+
 == Implementation details
 
 Issues are exported as VEVENT-items with their due-date as the event date. The same applies to versions. Unassigned issues have the status TENTATIVE.
