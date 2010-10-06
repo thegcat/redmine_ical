@@ -18,13 +18,12 @@
 require 'icalendar'
 
 class ICalendarController < ApplicationController
-  before_filter :find_project
+  before_filter :find_optional_project
   accept_key_auth :index
   
   def index
     # project
-    ids = [@project.id] + @project.descendants.collect(&:id)
-    project_condition = ["#{Project.table_name}.id IN (?)", ids]
+    project_condition = @project ? ["#{Project.table_name}.id IN (?)", ([@project.id] + @project.descendants.collect(&:id))] : nil
     
     # issue status
     case params[:status]
@@ -71,10 +70,8 @@ class ICalendarController < ApplicationController
 
 private
   
-  def find_project
-    @project = Project.find(params[:project_id])
-    rescue ActiveRecord::RecordNotFound
-    render_404
+  def find_optional_project
+    @project = Project.find_by_identifier(params[:project_id])
   end
   
   def create_calendar(events)
@@ -89,20 +86,22 @@ private
       event = Icalendar::Event.new
       event.dtstart        i.due_date, {'VALUE' => 'DATE'}
       event.dtend          i.due_date + 1, {'VALUE' => 'DATE'}
+      project_prefix = @project.nil? ? "#{i.project.name}: " : "" # add project name if this is a global feed
       if i.is_a? Issue
-        event.summary      "#{i.subject} (#{i.status.name})"
-        event.url          url_for(:controller => 'issues', :action => 'show', :id => i.id, :project_id => i.project_id)
+        event.summary      "#{project_prefix}#{i.subject} (#{i.status.name})"
+        event.url          url_for(:controller => 'issues', :action => 'show', :id => i.id, :project_id => i.project.identifier)
         unless i.fixed_version.nil?
           event.categories   [i.fixed_version.name]
         end
-        unless i.assigned_to.nil?
-          event.add_contact  i.assigned_to.name, {"ALTREP" => i.assigned_to.mail}
+        contacts = [i.author, i.assigned_to] + i.watcher_users
+        contacts.compact.uniq.each do |contact|
+          event.add_contact contact.name, {"ALTREP" => contact.mail}
         end
         event.organizer    "mailto:#{i.author.mail}", {"CN" => i.author.name}
         event.status       i.assigned_to == nil ? "TENTATIVE" : "CONFIRMED"
         event.created      i.created_on.to_date, {'VALUE' => 'DATE'}
       elsif i.is_a? Version
-        event.summary      "%s '#{i.name}'" % l(:label_calendar_deadline)
+        event.summary      "#{project_prefix}%s '#{i.name}'" % l(:label_calendar_deadline)
         event.url          url_for(:controller => 'versions', :action => 'show', :id => i.id)
       else
       end
