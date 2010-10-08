@@ -1,6 +1,7 @@
 # redmics - redmine icalendar export plugin
 # Copyright (c) 2010  Frank Schwarz, frank.schwarz@buschmais.com,
 # Jan Schulz-Hofen (Planio), jan@plan.io
+# Felix Schäfer, felix@fachschaften.org
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,16 +18,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require 'redmine'
+require 'dispatcher'
 
-require 'redmine_icalendar_export/hooks'
+Dispatcher.to_prepare do
+  require 'redmine_icalendar_export/patch_redmine_classes'
+end
 
 Redmine::Plugin.register :redmine_icalendar_export do
   name 'redmine icalendar export plugin (aka redmics)'
-  author 'Frank Schwarz, Jan Schulz-Hofen (Planio)'
+  author 'Frank Schwarz, Jan Schulz-Hofen (Planio), Felix Schäfer'
   description 'ICalendar view of issue- and version-deadlines'
-  version '1.1'
-  url 'http://code.google.com/p/redmics/'
-  author_url 'http://www.buschmais.de/'
+  version 'thegcat-trunk'
+  url 'http://github.com/thegcat/redmine_icalendar_export'
+  author_url 'http://orga.fachschaften.org/users/3'
 end
 
 
