@@ -1,4 +1,4 @@
-# redmics - redmine icalendar export plugin
+# redmine_ical
 # Copyright (c) 2010  Frank Schwarz, frank.schwarz@buschmais.com,
 # Jan Schulz-Hofen (Planio), jan@plan.io
 # Felix Schäfer, felix@fachschaften.org
@@ -21,15 +21,17 @@ require 'redmine'
 require 'dispatcher'
 
 Dispatcher.to_prepare do
-  require 'redmine_icalendar_export/patch_redmine_classes'
+  require 'redmine_ical/patch_redmine_classes'
 end
 
-Redmine::Plugin.register :redmine_icalendar_export do
-  name 'redmine icalendar export plugin (aka redmics)'
+require_dependency 'redmine_ical/view_hooks'
+
+Redmine::Plugin.register :redmine_ical do
+  name 'Redmine Ical Plugin'
   author 'Frank Schwarz, Jan Schulz-Hofen (Planio), Felix Schäfer'
   description 'ICalendar view of issue- and version-deadlines'
   version 'thegcat-trunk'
-  url 'http://github.com/thegcat/redmine_icalendar_export'
+  url 'https://orga.fachschaften.org/projects/redmine-ical'
   author_url 'http://orga.fachschaften.org/users/3'
 end
 

@@ -1,0 +1,5 @@
+<% if User.current.allowed_to?(:view_calendar, @project, :global => true)%>
+	<% other_formats_links do |f| %>
+		<%= f.link_to 'ICS', :url => params.merge({:key => User.current.rss_key, :format => 'ics'}) %>
+	<% end %>
+<% end %>
