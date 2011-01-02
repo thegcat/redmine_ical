@@ -28,10 +28,10 @@ require_dependency 'redmine_ical/view_hooks'
 
 Redmine::Plugin.register :redmine_ical do
   name 'Redmine Ical Plugin'
-  author 'Frank Schwarz, Jan Schulz-Hofen (Planio), Felix Schäfer'
+  author 'Felix Schäfer (based on work from Frank Schwarz and Jan Schulz-Hofen (Planio))'
   description 'ICalendar view of issue- and version-deadlines'
   version 'thegcat-trunk'
-  url 'https://orga.fachschaften.org/projects/redmine-ical'
+  url 'https://orga.fachschaften.org/projects/redmine_ical'
   author_url 'http://orga.fachschaften.org/users/3'
 end
 
