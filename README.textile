@@ -2,6 +2,8 @@ h1. Redmine Ical
 
 ICalendar (ICS) view of issue and version due dates.
 
+This plugin is originally based on the "Redmics Plugin":http://code.google.com/p/redmics/, but is a near-complete rework to use existing redmine facilities instead of an extra implementation. This also allows one to use custom queries already defined for issues for the calendar, though Redmine is still lacking on the UI side to fully support this.
+
 *Warning*: I am currently no longer actively developping for Redmine and have become a member of the "ChiliProject":https://www.chiliproject.org core team instead. I will no longer put any active effort into maintaining this plugin for Redmine and will focus in getting its functionality into ChiliProject instead. This especially means that I'll consider patches and code contributions and I might fix small bugs if reported, nothing more. If anyone wants to take over this project, please contact me through GitHub.
 
 h2. Requirements
