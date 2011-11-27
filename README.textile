@@ -2,6 +2,14 @@ h1. Redmine Ical
 
 ICalendar (ICS) view of issue and version due dates.
 
+*Warning*: I am currently no longer actively developping for Redmine and have
+become a member of the "ChiliProject":https://www.chiliproject.org core team
+instead. I will no longer put any active effort into maintaining this plugin
+for Redmine and will focus in getting its functionality into ChiliProject
+instead. This especially means that I'll consider patches and code contributions
+and I might fix small bugs if reported, nothing more. If anyone wants to take
+over this project, please contact me through GitHub.
+
 h2. Requirements
 
 This plugin aims to be compatible with
