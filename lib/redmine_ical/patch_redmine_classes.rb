@@ -55,7 +55,7 @@ module Plugin
           cal.custom_property("X-WR-CALNAME;VALUE=TEXT", html_title)
           @events.each do |event|
             e = event.to_ical_hash
-            return unless e
+            next unless e
             e[:url] = url_for(:controller => e[:type].to_s.pluralize, :action => 'show', :id => e[:id], :only_path => false)
             cal.event do
               summary       e[:summary]
