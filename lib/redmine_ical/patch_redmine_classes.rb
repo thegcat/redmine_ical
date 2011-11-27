@@ -56,7 +56,7 @@ module Plugin
           @events.each do |event|
             e = event.to_ical_hash
             return unless e
-            e[:url] = url_for(:controller => e[:type].to_s.pluralize, :action => 'show', :id => e[:id], :only_path => false)#, :host => request.host, :port => request.port, :protocol => request.protocol)
+            e[:url] = url_for(:controller => e[:type].to_s.pluralize, :action => 'show', :id => e[:id], :only_path => false)
             cal.event do
               summary       e[:summary]
               description   e[:description]
