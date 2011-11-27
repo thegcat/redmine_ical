@@ -4,6 +4,15 @@ ICalendar (ICS) view of issue and version due dates.
 
 h2. Requirements
 
+This plugin aims to be compatible with
+
+* Redmine
+
+This plugin is pretty basic and should work with every flavor of Redmine. The
+pre-1.2.1-version should work with ChiliProject too, this is untested though.
+
+In addition to that, you will need the following gems:
+
 * icalendar >= 1.1.5 (http://icalendar.rubyforge.org/).
 
 h2. Installation
@@ -12,9 +21,18 @@ Generic Redmine plugin installation instructions can be found in the "Redmine wi
 
 Note that this plugin doesn't require a database migration but 2 patches included in the @extra@ folder. The gist of it is: go to your redmine directory, run the following commands and restart redmine:
 
-<pre>git clone https://git.fachschaften.org/redmine_ical
-patch -p 1 < vendor/plugins/redmine_ical/extra/ics_format_accepts_key_auth.patch
-patch -p 1 < vendor/plugins/redmine_ical/extra/view_calendars_show_bottom_hook.patch</pre>
+h3. Redmine 1.2.1 or higher
+
+<pre>gem install icalendar
+git clone https://github.com/thegcat/redmine_ical.git vendor/plugins/redmine_ical
+patch -p 1 < vendor/plugins/redmine_ical/extra/redmine_ical.patch</pre>
+
+h3. Redmine 1.2.0 or lower
+
+<pre>gem install icalendar
+git clone https://github.com/thegcat/redmine_ical.git vendor/plugins/redmine_ical
+patch -p 1 < vendor/plugins/redmine_ical/extra/ics_format_accepts_key_auth-pre_1_2_1.patch
+patch -p 1 < vendor/plugins/redmine_ical/extra/view_calendars_show_bottom_hook-pre_1_2_0.patch</pre>
 
 h2. Features
 

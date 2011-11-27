@@ -1,0 +1,26 @@
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index cf9a849..a8f28eb 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
+       user = User.try_to_autologin(cookies[:autologin])
+       session[:user_id] = user.id if user
+       user
+-    elsif params[:format] == 'atom' && params[:key] && request.get? && accept_rss_auth?
++    elsif %w(atom ics).include?(params[:format]) && params[:key] && request.get? && accept_rss_auth?
+       # RSS key authentication does not start a session
+       User.find_by_rss_key(params[:key])
+     elsif Setting.rest_api_enabled? && accept_api_auth?
+diff --git a/app/views/calendars/show.html.erb b/app/views/calendars/show.html.erb
+index 0b9d677..2f26561 100644
+--- a/app/views/calendars/show.html.erb
++++ b/app/views/calendars/show.html.erb
+@@ -28,6 +28,8 @@
+ <% if @query.valid? %>
+ <%= render :partial => 'common/calendar', :locals => {:calendar => @calendar} %>
+ 
++<%= call_hook(:view_calendars_show_bottom, { :year => @year, :month => @month, :project => @project, :query => @query }) %>
++
+ <p class="legend cal">
+ 	<span class="starting"><%= l(:text_tip_issue_begin_day) %></span>
+ 	<span class="ending"><%= l(:text_tip_issue_end_day) %></span>
