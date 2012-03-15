@@ -59,7 +59,7 @@ module Plugin
             e[:url] = url_for(:controller => e[:type].to_s.pluralize, :action => 'show', :id => e[:id], :only_path => false)
             cal.event do
               summary       e[:summary]
-              description   e[:description]
+              description   "#{e[:description]}\n\n#{e[:url]}"
               created       e[:created].to_datetime
               last_modified e[:updated].to_datetime
               dtstart       e[:date], {"VALUE" => ["DATE"]}
