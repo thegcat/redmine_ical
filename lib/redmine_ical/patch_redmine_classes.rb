@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -27,9 +27,9 @@ module Plugin
   module Ical
     module CalendarsController
       module ClassMethods
-        
+
       end
-      
+
       module InstanceMethods
         def show_with_ical
           respond_to do |format|
@@ -37,7 +37,7 @@ module Plugin
             format.ics { render :text => ical, :layout => false }
           end
         end
-        
+
         def ical
           # retrieve events 3 months old or newer
           retrieve_query
@@ -51,7 +51,7 @@ module Plugin
           end
           cal = Icalendar::Calendar.new
           cal.product_id = "+//IDN fachschaften.org//redmine_ical//EN"
-          html_title(@query.new_record? ? l(:label_calendar) : @query.name) # tricks redmine into outputting a pretty title on next call of html_title 
+          html_title(@query.new_record? ? l(:label_calendar) : @query.name) # tricks redmine into outputting a pretty title on next call of html_title
           cal.custom_property("X-WR-CALNAME;VALUE=TEXT", html_title)
           @events.each do |event|
             e = event.to_ical_hash
@@ -71,7 +71,7 @@ module Plugin
           cal.to_ical
         end
       end
-      
+
       def self.included(receiver)
         receiver.extend         ClassMethods
         receiver.send :include, InstanceMethods
@@ -83,11 +83,11 @@ module Plugin
         end
       end
     end
-    
+
     module Issue
       module ClassMethods
       end
-      
+
       module InstanceMethods
         def to_ical_hash
           date = due_date
@@ -103,7 +103,7 @@ module Plugin
            }
         end
       end
-      
+
       def self.included(receiver)
         receiver.extend         ClassMethods
         receiver.send :include, InstanceMethods
@@ -112,11 +112,11 @@ module Plugin
         end
       end
     end
-    
+
     module Version
       module ClassMethods
       end
-      
+
       module InstanceMethods
         def to_ical_hash
           return unless due_date
@@ -130,7 +130,7 @@ module Plugin
            }
         end
       end
-      
+
       def self.included(receiver)
         receiver.extend         ClassMethods
         receiver.send :include, InstanceMethods
