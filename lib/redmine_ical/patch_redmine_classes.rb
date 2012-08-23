@@ -141,7 +141,3 @@ module Plugin
     end
   end
 end
-
-CalendarsController.send(:include, ::Plugin::Ical::CalendarsController)
-Issue.send(:include, ::Plugin::Ical::Issue)
-Version.send(:include, ::Plugin::Ical::Version)
