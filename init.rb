@@ -18,10 +18,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require 'redmine'
-require 'dispatcher'
+require 'dispatcher' unless Rails::VERSION::MAJOR >= 3
 
-Dispatcher.to_prepare do
-  require 'redmine_ical/patch_redmine_classes'
+if Rails::VERSION::MAJOR >= 3
+  ActionDispatch::Callbacks.to_prepare do
+    require 'redmine_ical/patch_redmine_classes'
+  end
+else
+  Dispatcher.to_prepare do
+    require 'redmine_ical/patch_redmine_classes'
+  end
 end
 
 require_dependency 'redmine_ical/view_hooks'
