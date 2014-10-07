@@ -19,9 +19,12 @@
 
 require 'redmine'
 require 'dispatcher'
-
+require 'redmine_ical/patch_redmine_classes'
+  
 Dispatcher.to_prepare do
-  require 'redmine_ical/patch_redmine_classes'
+  CalendarsController.send(:include, ::Plugin::Ical::CalendarsController)
+	Issue.send(:include, ::Plugin::Ical::Issue)
+	Version.send(:include, ::Plugin::Ical::Version)
 end
 
 require_dependency 'redmine_ical/view_hooks'
